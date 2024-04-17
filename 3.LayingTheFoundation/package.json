@@ -1,0 +1,33 @@
+{
+  "name": "3.layingthefoundation",
+  "version": "1.0.0",
+  "description": "This is a React Project by Akash",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akash-Dutt/React-Projects.git"
+  },
+  "keywords": [
+    "React"
+  ],
+  "author": "Akash Dutt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akash-Dutt/React-Projects/issues"
+  },
+  "homepage": "https://github.com/Akash-Dutt/React-Projects#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "browserslist": [
+    "last 2 version"
+  ]
+}
