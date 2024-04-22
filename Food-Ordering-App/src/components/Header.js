@@ -1,7 +1,8 @@
 import {LOGO_URL}  from "../utils/constants";
-
+import {useState} from "react";
     //Header Component
     const Header = () => {
+        const [LoginBtn, setLoginBtn] = useState("Login");
         return (
             <div className="header">
                 <div className="logo-container">
@@ -13,6 +14,15 @@ import {LOGO_URL}  from "../utils/constants";
                         <li>About Us</li>
                         <li>Contact Us</li>
                         <li> <span className="material-symbols-outlined">shopping_cart</span></li>
+                        <button className="logInOut-btn" 
+                                onClick = {() => {
+                                    if(LoginBtn == "Login"){
+                                        setLoginBtn("Logout");
+                                    }else{
+                                        setLoginBtn("Login");
+                                    }
+                                }} 
+                        >{LoginBtn}</button>
                     </ul>
                 </div>
             </div>

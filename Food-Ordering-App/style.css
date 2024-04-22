@@ -20,6 +20,7 @@ body {
 
 .nav-items > ul {
    display: flex;
+   align-items: center;
    padding: 0 20px;
 }
 
@@ -71,7 +72,7 @@ body {
 }
 .res-card {
     width: 320px;
-    height: 390px;
+    height: 370px;
     border: 2px solid back;
     border-radius : 15px 15px;
     background-color: #FFF5E0;
@@ -92,13 +93,21 @@ body {
 }
 
 
-h3 {
+h4 {
     margin: 0px;
     padding: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
 }
-h4{
+h5{
     margin: 0px;
     padding: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
 }
 
 
@@ -112,8 +121,59 @@ h4{
     background-color: #8DECB4;
     border-radius: 10px;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .filter-btn:hover{
+    background-color: orange;
+}
+
+.shimmer-search{
+    width: 1200px;
+    height: 25px;
+    border-radius: 20px;
+    background-color: gray;
+    margin-top: 10px;
+}
+
+.shimmer-btns{
+    display: flex;
+    margin-top: 15px; 
+    margin-left: 10px;
+}
+
+.shimmer-btn{
+    border-radius: 10px;
+    width: 150px;
+    height: 21.2px;
+    border-radius: 15px 15px;
+    background-color: gray;
+    margin-left: 10px;
+}
+
+.shimmer-cards{
+    padding: 5px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.shimmer-card{
+    width: 340px;
+    height: 395px;
+    background-color: gray;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+
+.logInOut-btn{
+    width: 80px;
+    height: 30px;
+    border-radius: 15px 15px;
+    background-color: #8DECB4;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+.logInOut-btn:hover{
     background-color: orange;
 }

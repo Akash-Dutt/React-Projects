@@ -77,11 +77,11 @@ const[<name>, set<name>] = useState([objects here]);
 - Whenever a state varible updates, react re-renders the component
 - How React is Doing this re-rendering of component when a State of Variable changes, it keep the sync of data layer and UI Layer. it do it with
   these concepts:-
+
   - Virtual DOM
-  - Reconciliation Algorithm/ React Fibre
-    - Virtual DOM is a representation of Actual DOM
-    - React Elements are Virtual DOM
-    - React Fibre Architecture
-    - React Core Algorithm
-    - Difference Algrithms which do efficient DOM Manipulation
-      - Whenever react finds the change in the virtual DOM , it changes the UI
+  - Reconciliation Algorithm/ React Fibre - Virtual DOM is a representation of Actual DOM - React Elements are Virtual DOM - React Fibre Architecture - React Core Algorithm - Difference Algrithms which do efficient DOM Manipulation - Whenever react finds the change in the virtual DOM , it changes the UI
+  - Whenever state variables updates, react trigger a reconcilliation cycle(re-renders the component)
+
+  <!-- useEffect() -->
+
+-

@@ -1,7 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import RestaurantList from "../utils/mockData";
-import {useState} from "react";
-
+import {useState, useEffect} from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
     //Normal JS Variable
@@ -461,12 +461,49 @@ const Body = () => {
     // }];
 
     //Local State Variable - super powerful variable
-    let [ListOfRestaurants, setListOfRestaurant] = useState(RestaurantList); 
-    return (
+    const [ListOfRestaurants, setListOfRestaurant] = useState([]);
+    const [filteredRestaurantList, setFilteredRestaurantList] = useState([]);
+    const [searchText, setsearchText] = useState("");
+    // Whenever state variables updates, react trigger a reconcilliation cycle(re-renders the component)
+    useEffect(()=>{
+        fetchData();
+    }, []);
+   
+    const fetchData = async () => {
+        const data = await fetch(
+            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        );
+
+        const json = await data.json();
+
+        //optional chaining
+        setListOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestaurantList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    };
+
+    //conditional Rendering
+    // if(ListOfRestaurants.length == 0){
+    //     return <Shimmer/>;
+    // }
+    return ListOfRestaurants.length === 0 ? <Shimmer/> : (
         <div className="body">
             <div className="search">
-                <input className="inp" type="text" placeholder="Get your favourite food at the earliest !"></input>
-                <button className="btn"> Search </button>
+                <input className="inp" 
+                       type="text" 
+                       placeholder="Get your favourite food at the earliest !" 
+                       value={searchText}
+                        onChange={(e) => {setsearchText(e.target.value)}
+                       }
+                />
+                <button className="btn" 
+                        onClick = {() => {
+                            //filtering the restaurant cards and update the UI
+                            const filteredRes = ListOfRestaurants.filter(
+                                (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()) 
+                            );
+                            setFilteredRestaurantList(filteredRes);
+                        }} 
+                > Search </button>
             </div>
             <div className="filter">
                 {/* Top Rated Restaurants */}
@@ -474,29 +511,32 @@ const Body = () => {
                     className="filter-btn" 
                     onClick={ () => {
                         //filter logic
-                        const filteredList = ListOfRestaurants.filter(
-                            (res) => res.info.avgRating >= 4.6
-                        )
-                        setListOfRestaurant(filteredList);
+                        const filteredList = filteredRestaurantList.filter(
+                            (res) => res.info.avgRating > 4.3
+                        );
+                        setFilteredRestaurantList(filteredList);
                     }}
-                >Top Rated Restaurants</button>
+                >
+                    Top Rated Restaurants
+                </button>
                 {/*button see all restaurants*/}
                 <button 
                     className="filter-btn"
-                    onClick={()=>{
-                        setListOfRestaurant(RestaurantList);   
-                    }}
-                >See All Restaurants
+                    onClick={ () => {
+                        setFilteredRestaurantList(ListOfRestaurants);   
+                    }}  
+                >
+                    See All Restaurants
                 </button>
             </div>
             <div className="res-container">
                 {/* these are known as passing props to a component */}
                 {/* <RestaurantCard resData = {RestaurantList[0]}/>   - early this was like this */}
                 {/* Each object must be uniquely identified so passing a unique key is mandatory */}
-                {ListOfRestaurants.map(restaurant => <RestaurantCard key={restaurant.info.id} resData={restaurant}/>)}
+                {filteredRestaurantList.map(restaurant => (<RestaurantCard key={restaurant.info.id} resData={restaurant}/>))}
             </div>
         </div>
     ) 
 };
-
+ 
 export default Body;
